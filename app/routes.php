@@ -13,8 +13,22 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('welcome');
 });
+
+Route::get('/lorem', function()
+{
+	return View::make('lorem');
+});
+
+Route::get('/users', function()
+{
+	return View::make('users');
+});
+
+
+
+
 Route::get('/new', function() {
 
     $view  = '<form method="POST">';
@@ -26,6 +40,12 @@ Route::get('/new', function() {
 });
 
 Route::post('/new', function() {
+
+    $input =  Input::all();
+    print_r($input);
+
+});
+Route::get('/nothing', function() {
 
     $input =  Input::all();
     print_r($input);
