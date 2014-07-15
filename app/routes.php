@@ -26,6 +26,33 @@ Route::get('/users', function()
 	return View::make('users');
 });
 
+Route::post('/lorem', function()
+{
+	return View::make('lorem');
+});
+
+Route::post('/users', function()
+{
+	$faker = Faker\Factory::create();
+    $input =  Input::all();
+	$users = "";
+	for ($i=0; $i < $input['num_users']; $i++) {
+		$users .= '<p>';
+		$users .= '<span class="name">'.$faker->name.'</span>';
+		if(isset($input['inc_location'])) {
+			$users .= ' <span class="location">- '.$faker->city.', '.$faker->stateAbbr.'</span>';
+		}
+		if(isset($input['inc_birthdate'])) {
+			$users .= ' <span class="birthdate">- Date of Birth:</span> '.$faker->monthName." ".$faker->dayOfMonth.", ".$faker->year;
+		}
+		if(isset($input['inc_information'])) {
+			$users .= '<br><span class="information">'.$faker->realText.'</span>';
+		}
+		$users .= '</p>'."\n";
+	}
+	return View::make('users_list')->with('users',$users);
+});
+
 
 
 

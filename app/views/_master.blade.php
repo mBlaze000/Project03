@@ -19,6 +19,10 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+	<?php 
+	#$faker = Faker\Factory::create(); 
+	?>
+     
 </head>
 <body>
 
@@ -52,6 +56,8 @@
         <div class="footer">
             <p>&copy; Dynamic Web Applications - Summer 2014</p>
         </div>
+        
+        <?php #echo $faker->name; ?>
     
     </div><!-- /.container -->
     
