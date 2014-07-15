@@ -21,14 +21,23 @@ Route::get('/lorem', function()
 	return View::make('lorem');
 });
 
+Route::post('/lorem', function()
+{
+    $input =  Input::all();
+	$lorem = "";
+	$generator = new Badcow\LoremIpsum\Generator();
+	$paragraphs = $generator->getParagraphs($input['num_paragraphs']);
+	for ($i=0; $i < $input['num_paragraphs']; $i++) {
+		$lorem .= '<p>';
+		$lorem .= $paragraphs[$i];
+		$lorem .= '</p>'."\n";
+	}
+	return View::make('lorem_list')->with('lorem',$lorem);
+});
+
 Route::get('/users', function()
 {
 	return View::make('users');
-});
-
-Route::post('/lorem', function()
-{
-	return View::make('lorem');
 });
 
 Route::post('/users', function()
@@ -56,22 +65,6 @@ Route::post('/users', function()
 
 
 
-Route::get('/new', function() {
-
-    $view  = '<form method="POST">';
-    $view .= 'Title: <input type="text" name="title">';
-    $view .= '<input type="submit">';
-    $view .= '</form>';
-    return $view;
-
-});
-
-Route::post('/new', function() {
-
-    $input =  Input::all();
-    print_r($input);
-
-});
 Route::get('/nothing', function() {
 
     $input =  Input::all();
