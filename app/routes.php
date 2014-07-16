@@ -1,59 +1,66 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the Closure to execute when that URI is requested.
-|
-*/
-
+// Home page
 Route::get('/', function()
 {
 	return View::make('welcome');
 });
 
+// Display the Lorem Ipsum form
 Route::get('/lorem', function()
 {
 	return View::make('lorem');
 });
 
+// Process/display the Lorem Ipsum paragraphs
 Route::post('/lorem', function()
 {
-    $input =  Input::all();
-	$lorem = "";
+    $input =  Input::get('num_paragraphs');
+	$lorem = "\n";
 	$generator = new Badcow\LoremIpsum\Generator();
-	$paragraphs = $generator->getParagraphs($input['num_paragraphs']);
-	for ($i=0; $i < $input['num_paragraphs']; $i++) {
-		$lorem .= '<p>';
+	
+	//Generate the number of parargraphs based on user input
+	$paragraphs = $generator->getParagraphs($input);
+	
+	//Build string variable for paragraph output on page
+	for ($i=0; $i < $input; $i++) {
+		$lorem .= "\t\t\t".'<p>';
 		$lorem .= $paragraphs[$i];
 		$lorem .= '</p>'."\n";
 	}
 	return View::make('lorem_list')->with('lorem',$lorem);
 });
 
+// Display the Generic Users form
 Route::get('/users', function()
 {
 	return View::make('users');
 });
 
+// Process/display the Generic Users list
 Route::post('/users', function()
 {
+	// Create a Faker\Generator instance
 	$faker = Faker\Factory::create();
     $input =  Input::all();
-	$users = "";
+	$users = "\n";
+	
+	// Build string variable for user output on page
 	for ($i=0; $i < $input['num_users']; $i++) {
-		$users .= '<p>';
+		$users .= "\t\t\t".'<p>';
 		$users .= '<span class="name">'.$faker->name.'</span>';
+		
+		// Include hometown if location is selected by user
 		if(isset($input['inc_location'])) {
-			$users .= ' <span class="location">- '.$faker->city.', '.$faker->stateAbbr.'</span>';
+			$users .= '<br><span class="location">Hometown:</span> '.$faker->city.', '.$faker->stateAbbr;
 		}
+		
+		// Include birthday if birthdate is selected by user
 		if(isset($input['inc_birthdate'])) {
-			$users .= ' <span class="birthdate">- Date of Birth:</span> '.$faker->monthName." ".$faker->dayOfMonth.", ".$faker->year;
+			$users .= '<br><span class="birthdate">Date of Birth:</span> '.$faker->monthName." ".$faker->dayOfMonth.", ".$faker->year;
 		}
+		
+		// Include information if profile blurb is selected by user
 		if(isset($input['inc_information'])) {
 			$users .= '<br><span class="information">'.$faker->realText.'</span>';
 		}
@@ -62,12 +69,3 @@ Route::post('/users', function()
 	return View::make('users_list')->with('users',$users);
 });
 
-
-
-
-Route::get('/nothing', function() {
-
-    $input =  Input::all();
-    print_r($input);
-
-});

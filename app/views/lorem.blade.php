@@ -9,7 +9,7 @@
 @stop
 
 @section('body')
-	<p class="lead">Use this form to create however many paragraphs you might need.</p>
+	<p class="lead">Use this tool to select how many paragraphs you might need.</p>
     <form method="post">
         <p>
             <label for="num_paragraphs">Number of paragraphs:</label>

@@ -10,6 +10,7 @@
 
 @section('body')
 	<p class="lead">Here is a list of your generic users:</p>
-	{{$users}}
+    <div class="well">{{$users}}
+    </div>
 @stop
 

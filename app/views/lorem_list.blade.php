@@ -10,6 +10,7 @@
 
 @section('body')
 	<p class="lead">Here are your lorem ipsum paragraphs:</p>
-	{{$lorem}}
+    <div class="well">{{$lorem}}
+    </div>
 @stop
 

@@ -88,16 +88,14 @@ body {
   }
 }
 
-/* CUSTOMIZED STYLES FOR PROJECT 3 */
+/* CUSTOMIZED STYLES FOR CSCI S-15 PROJECT 3 */
 
 /* Generic Users */
 .name {
 	font-size: larger;
 	font-weight: bold;
 }
-.location {
-}
-.birthdate {
+.location, .birthdate {
 	font-weight: bold;
 }
 .information {

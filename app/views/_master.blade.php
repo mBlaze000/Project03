@@ -50,7 +50,7 @@
         
         <!-- Site footer -->
         <div class="footer">
-            <p>&copy; Dynamic Web Applications - Summer 2014</p>
+            <p>&copy; James Burke - Dynamic Web Applications - Summer 2014</p>
         </div>
         
     </div><!-- /.container -->
